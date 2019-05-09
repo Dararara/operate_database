@@ -2,16 +2,13 @@ import csv
 import psycopg2
 from psycopg2 import sql
 from check_insert import *
-user = input('tell me the user name')
-dbname = input('tell me the database name')
-password = input('tell me the password of database')
-conn = psycopg2.connect(dbname=dbname, user=user, password=password, host = "122.152.251.171")
+
 cur = conn.cursor()
 
 i = 0
 servent_id = ''
 while i < 3:
-    temp = input('tell me which servent you want to delete from database')
+    temp = input('tell me which servent you want to delete from database: ')
     if temp == 'q':
         exit(1)
     elif temp == servent_id:
@@ -32,3 +29,4 @@ try:
 except Exception as e:
     print(e)
 conn.commit()
+conn.close()

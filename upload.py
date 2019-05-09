@@ -2,16 +2,13 @@ import csv
 import psycopg2
 from psycopg2 import sql
 from check_insert import *
-user = input('tell me the user name')
-dbname = input('tell me the database name')
-password = input('tell me the password of database')
-conn = psycopg2.connect(dbname=dbname, user=user, password=password, host = "122.152.251.171")
+conn = login()
 cur = conn.cursor()
 
 
-type = input("tell me which you want to upload(book/article)")
+type = input("tell me which you want to upload(book/article): ")
 if type == 'book' or type == 'article':
-    path = input('tell me the path of csv file')
+    path = input('tell me the path of csv file: ')
     try:
         csvfile = open(path)
         reader = csv.DictReader(csvfile)

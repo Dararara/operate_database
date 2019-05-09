@@ -2,14 +2,10 @@ import csv
 import psycopg2
 from psycopg2 import sql
 from check_insert import *
-user = input('tell me the user name')
-dbname = input('tell me the database name')
-password = input('tell me the password of database')
-host = input('tell me the host')
-conn = psycopg2.connect(dbname=dbname, user=user, password=password, host = host)
+conn = login()
 cur = conn.cursor()
 
-path = input('tell me the path of csv')
+path = input('tell me the path of csv: ')
 csvfile = open(path)
 reader = csv.DictReader(csvfile)
 for row in reader:

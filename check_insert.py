@@ -2,6 +2,14 @@ import csv
 import psycopg2
 from psycopg2 import sql
 
+def login():
+    user = input('tell me the user name: ')
+    dbname = input('tell me the database name: ')
+    password = input('tell me the password of database: ')
+    host = input('tell me the host: ')
+    conn = psycopg2.connect(dbname=dbname, user=user, password=password, host = host)
+    return conn
+
 def find_id(cur, id_name, table, match_name, match_value):
     string = 'select {0} from {1} where {2} = %s;'
     cur.execute(sql.SQL(string).format(sql.Identifier(id_name), sql.Identifier(table), sql.Identifier(match_name), ), [match_value])
@@ -13,9 +21,7 @@ def delete_servent(cur, table_name, term_name, term_value):
 
 def check_double_exist(cur, table_name, term1, term1_value, term2, term2_value):
     string = 'select exists(select * from {0} where {1} = %s or {2} = %s);'
-    print('so far')
     cur.execute(sql.SQL(string).format(sql.Identifier(table_name), sql.Identifier(term1), sql.Identifier(term2)), [term1_value, term2_value])
-    print('so good')
     return cur.fetchone()[0]
 
 def insert_double_value(cur, table_name, term1, term1_value, term2, term2_value):
